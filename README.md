@@ -54,7 +54,8 @@ uber-yango-php/
 │   └── assets/{css,js}/      # estilos + JS de UI
 ├── database/
 │   ├── schema.sql            # CREATE DATABASE + tablas
-│   └── seed.sql              # datos demo (5 usuarios, 2 vehículos, tarifas)
+│   ├── seed.sql              # datos demo (5 usuarios, 2 vehículos, tarifas)
+│   └── uber_yango_full.sql   # volcado completo (schema + seed) en un solo archivo
 ├── .env.example
 ├── .gitignore
 └── README.md
@@ -82,9 +83,15 @@ cp .env.example .env
 ### 3. Crear la base de datos y cargar datos demo
 
 ```bash
+# Opción A — un solo archivo (recomendado para phpMyAdmin/Workbench/CLI)
+mysql -u root -p < database/uber_yango_full.sql
+
+# Opción B — schema y datos por separado
 mysql -u root -p < database/schema.sql
 mysql -u root -p < database/seed.sql
 ```
+
+> 💡 En **phpMyAdmin** puedes abrir la pestaña **Importar**, elegir `database/uber_yango_full.sql` y pulsar *Continuar*. El archivo crea la base de datos `uber_yango` desde cero (la borra si ya existe).
 
 > El script crea la base `uber_yango`, las tablas y un set de 5 usuarios demo.
 
